@@ -10,6 +10,7 @@ public class Plant {
     private LocalDate dateIntroduced;
     private HashMap<Integer, Zone> zones = new HashMap<Integer, Zone>();
 
+    // TEST
     public Plant(long id, String genusSpecies, String commonName, PlantGroup plantGroup){
         this.id = id;
         this.genusSpecies = genusSpecies;
