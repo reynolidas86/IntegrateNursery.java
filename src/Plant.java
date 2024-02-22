@@ -1,18 +1,20 @@
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Plant {
-    //TODO: Verify if this function should halt execution or simply alert
-    //  If the intended behaviour is that the program will throw
-    //  an error if given an invalid 'String' then 'throw' statements
-    //  should be added. If it should only alert the user there is an
-    //  error then 'System.err.println' should be used.
-    ///////////////////////////////////////////////////
-    //                      NOTE                     //
-    // This implementation is only alerting the user //
-    ///////////////////////////////////////////////////
+    //TODO: Find better name
+    public static final HashMap<String, Predicate<Plant>> tempName;
+    static{
+        tempName = new HashMap<>();
+        //TODO: Most experience predicate
+        tempName.put("most_experienced", (p) -> {/* [CODE HERE] */ return false; });
+        //TODO: Least experience predicate
+        tempName.put("least_experienced", (p) -> {/* [CODE HERE] */ return false; });
+    }
+
     private static void validateGenusSpecies(String genusSpecies){
         if (genusSpecies.length() < 7 || genusSpecies.length() > 39){
             //Breaks character bounds defined in Canvas
@@ -74,16 +76,6 @@ public class Plant {
             return; //Early return
         }
     }
-
-    //TODO: Verify if this function should halt execution or simply alert
-    //  If the intended behaviour is that the program will throw
-    //  an error if given an invalid 'String' then 'throw' statements
-    //  should be added. If it should only alert the user there is an
-    //  error then 'System.err.println' should be used.
-    ///////////////////////////////////////////////////
-    //                      NOTE                     //
-    // This implementation is only alerting the user //
-    ///////////////////////////////////////////////////
     private static void validateCommonName(String commonName){
         if (Character.isLowerCase(commonName.charAt(0))){
             //First letter is lowercase
@@ -105,6 +97,9 @@ public class Plant {
         this.genusSpecies = genusSpecies;
         this.commonName = commonName;
         this.plantGroup = plantGroup;
+
+        validateGenusSpecies(genusSpecies);
+        validateCommonName(commonName);
     }
 
     public boolean growsInZone(int zoneNumber){
