@@ -10,6 +10,7 @@ public class Plant {
     //  should be added. If it should only alert the user there is an
     //  error then 'System.err.println' should be used.
     ///////////////////////////////////////////////////
+    //                      NOTE                     //
     // This implementation is only alerting the user //
     ///////////////////////////////////////////////////
     private static void validateGenusSpecies(String genusSpecies){
@@ -42,7 +43,7 @@ public class Plant {
 
 
         if (uppercaseMatcher.find()){
-            //Has uppercase letters
+            //Has at least one uppercase letter
             
             if (Character.isLowerCase(genusSpecies.charAt(0))){
                 //First letter of genus is lowercase
@@ -52,13 +53,42 @@ public class Plant {
                 return; //Early return
             }
             
-            //TODO: Add if statment for multiple uppercase letters
+
+            //Because the 'find' method in the 'if' statement on line 44
+            //  evaluated to 'true', if the method returns 'true' again
+            //  we know that there must be more than one uppercase letter
+            if (uppercaseMatcher.find()) {
+                //More than one uppercase letter
+                System.err.println("Invalid plant name: " + genusSpecies);
+                System.err.println("Only 1 letter should be capitalized");
+
+                return; //Early return
+            }
 
         }
         else{
             //Does not contain any uppercase letters
             System.err.println("Invalid plant name: " + genusSpecies);
             System.err.println("No capital letters. The first letter of the genus should be uppercase");
+
+            return; //Early return
+        }
+    }
+
+    //TODO: Verify if this function should halt execution or simply alert
+    //  If the intended behaviour is that the program will throw
+    //  an error if given an invalid 'String' then 'throw' statements
+    //  should be added. If it should only alert the user there is an
+    //  error then 'System.err.println' should be used.
+    ///////////////////////////////////////////////////
+    //                      NOTE                     //
+    // This implementation is only alerting the user //
+    ///////////////////////////////////////////////////
+    private static void validateCommonName(String commonName){
+        if (Character.isLowerCase(commonName.charAt(0))){
+            //First letter is lowercase
+            System.err.println("Invalid common name for plant: " + commonName);
+            System.err.println("First letter of common name must be capitalized.");
         }
     }
 
