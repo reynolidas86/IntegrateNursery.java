@@ -1,11 +1,13 @@
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Plant {
-    //TODO: Find better name
+    //TODO: Find name
+    //This is the 'HashMap' to hold the filtering predicates
     public static final HashMap<String, Predicate<Plant>> tempName;
     static{
         tempName = new HashMap<>();
@@ -89,7 +91,7 @@ public class Plant {
     private String commonName;
     private PlantGroup plantGroup;
     private LocalDate dateIntroduced;
-    private HashMap<Integer, Zone> zones = new HashMap<Integer, Zone>();
+    private HashSet<Zone> zones = new HashSet<Zone>();
 
     // TEST
     public Plant(long id, String genusSpecies, String commonName, PlantGroup plantGroup){
@@ -102,11 +104,28 @@ public class Plant {
         validateCommonName(commonName);
     }
 
+    public long getId(){
+        return id;
+    }
+    public String getGenusAndSpecies(){
+        return genusSpecies;
+    }
+    public String getCommonName(){
+        return commonName;
+    }
+    public PlantGroup getPlantGroup(){
+        return plantGroup;
+    }
+    public LocalDate getDateIntroduced(){
+        return dateIntroduced;
+    }
+    public HashSet<Zone> getZones(){
+        return zones;
+    }
+
     public boolean growsInZone(int zoneNumber){
         //TODO: Double check this is the intended behaviour
-        //  Assumes that the zones 'HashMap' will only have the zones that
-        //  the plant is able to grow in. 
-        return zones.keySet().contains(zoneNumber);
+        return this.zones.contains(Zone.zones.get(zoneNumber));
     }
 
     @Override
