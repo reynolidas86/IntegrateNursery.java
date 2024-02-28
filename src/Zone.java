@@ -24,12 +24,30 @@ public class Zone {
         maxTemperature = max;
         minTemperature = min;
     }
-
+    /*
+     * Returns the value of the maximum temperature for the zone.
+     * 
+     * @return              The maximum temperature from the designated zone.
+     */
     public double getMaxTemperature(){
         return maxTemperature;
     }
     
+    /*
+     * Returns the value of the minimum temperature for the zone.
+     * 
+     * @return              The minimum temperature from the designated zone.
+     */
     public double getMinTemperature(){
         return minTemperature;
+    }
+
+        /**
+     * Returns the Set of Zones available for use of plants.
+     * 
+     * @return              The zones for the use of all plants.
+     */
+    public HashMap<Integer, Zone> getZones(){
+        return zones;
     }
 }
