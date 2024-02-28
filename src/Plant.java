@@ -6,15 +6,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Plant {
-    //TODO: Find name
+    //TODO: Add variables for comparison via predicates
+    /*
+     * private static LocalDate currentMostExperience;
+     * private static LocalDate currentLeastExperience;
+     */
+
     //This is the 'HashMap' to hold the filtering predicates
-    public static final HashMap<String, Predicate<Plant>> tempName;
+    public static final HashMap<String, Predicate<Plant>> filters;
     static{
-        tempName = new HashMap<>();
+        filters = new HashMap<>();
         //TODO: Most experience predicate
-        tempName.put("most_experienced", (p) -> {/* [CODE HERE] */ return false; });
+        filters.put("most_experienced", (p) -> {/* [CODE HERE] */ return false; });
         //TODO: Least experience predicate
-        tempName.put("least_experienced", (p) -> {/* [CODE HERE] */ return false; });
+        filters.put("least_experienced", (p) -> {/* [CODE HERE] */ return false; });
     }
 
     private static void validateGenusSpecies(String genusSpecies){
