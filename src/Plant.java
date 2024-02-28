@@ -92,29 +92,22 @@ public class Plant {
                 }
             }  
 
-            if(p.getCommonName().equalsIgnoreCase(tempPlant.getCommonName())){
-                return true;
-            }
-            else{
-                return false;
-            }
+            //Can return the bool result of this method call instead of using an if statement to return true or false literals
+            return p.getCommonName().equalsIgnoreCase(tempPlant.getCommonName());
         });
 
         //Indicating whether the given plant has the least experience comparing to other plants.
         evaluator.put("least_experienced", (p) -> {
             tempPlant = PlantDriver.plants.get(0);
-        for(int index = 1; index < PlantDriver.plants.size(); index ++) {
-            if(PlantDriver.plants.get(index).getDateIntroduced().isAfter(tempPlant.getDateIntroduced())){
-                tempPlant = PlantDriver.plants.get(index);
+            for(int index = 1; index < PlantDriver.plants.size(); index ++) {
+                if(PlantDriver.plants.get(index).getDateIntroduced().isAfter(tempPlant.getDateIntroduced())){
+                    tempPlant = PlantDriver.plants.get(index);
+                }
             }
-        }
-    
-        if(p.getCommonName().equalsIgnoreCase(tempPlant.getCommonName())){
-            return true;
-        }
-        else{
-            return false;
-        }});
+        
+            //Can return the bool result of this method call instead of using an if statement to return true or false literals
+            return p.getCommonName().equalsIgnoreCase(tempPlant.getCommonName());
+        });
     }
 
     private long id;
