@@ -1,7 +1,13 @@
 public class Tree extends Plant{
-    public Tree(long id, String genusSpecies, String commonName, PlantGroup plantGroup){
+    //TODO: Verify this should be a 'String' and not an 'enum'
+    private final String speed;
+
+    public Tree(long id, String genusSpecies, String commonName, PlantGroup plantGroup, String speed){
         super(id, genusSpecies, commonName, plantGroup);
+        this.speed = speed;
     }
 
-    //TODO: FILL OUT CLASS
+    public String getGrowthSpeed(){
+        return speed;
+    }
 }
