@@ -26,7 +26,7 @@ public class Plant {
     static{
         evaluator = new HashMap<String, Predicate<Plant>>();
         // Indicating whether the given plant has the most experience comparing to other plants.
-        evaluator.put("most_experienced", (p) -> {
+        evaluator.put("most", (p) -> {
             tempPlant = PlantDriver.plants.get(0);
             for(int index = 1; index < PlantDriver.plants.size(); index ++) {
                 if(PlantDriver.plants.get(index).getDateIntroduced().isBefore(tempPlant.getDateIntroduced())){
@@ -43,7 +43,7 @@ public class Plant {
         });
 
         //Indicating whether the given plant has the least experience comparing to other plants.
-        evaluator.put("least_experienced", (p) -> {
+        evaluator.put("least", (p) -> {
             tempPlant = PlantDriver.plants.get(0);
         for(int index = 1; index < PlantDriver.plants.size(); index ++) {
             if(PlantDriver.plants.get(index).getDateIntroduced().isAfter(tempPlant.getDateIntroduced())){

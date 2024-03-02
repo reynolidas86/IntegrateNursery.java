@@ -4,7 +4,7 @@ public class Zone {
     public static final HashMap<Integer, Zone> zones;
     static{
         zones = new HashMap<Integer, Zone>();
-        zones.put(1, new Zone(Double.NEGATIVE_INFINITY, -50.0));
+        zones.put(1, new Zone(-273.15, -50.0)); // Refernces temperatures from Absolute Zero to -50.
         zones.put(2, new Zone(-50.0, -40.0));
         zones.put(3, new Zone(-40.0, -30.0));
         zones.put(4, new Zone(-30.0, -20.0));
