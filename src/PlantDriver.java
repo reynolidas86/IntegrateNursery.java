@@ -45,7 +45,7 @@ public class PlantDriver {
         String commonName = sc.nextLine();
         System.out.print("Enter the scientific name of the plant\n\t");
         String scientificName = sc.nextLine();
-        System.out.println("Enter when the plant was first introduced to the nursery [YYYY-MM-DD]\n\t");
+        System.out.print("Enter when the plant was first introduced to the nursery [YYYY-MM-DD]\n\t");
         LocalDate introDate = LocalDate.parse(sc.nextLine());
         System.out.println();
 

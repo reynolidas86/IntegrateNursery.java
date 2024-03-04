@@ -103,8 +103,8 @@ public class Plant {
         this.dateIntroduced = dateIntroduced;
         plantGroup = group;
 
-        validateGenusSpecies(genusSpecies);
         validateCommonName(commonName);
+        validateGenusSpecies(genusSpecies);
 
         
         if (oldest == null && youngest == null){
