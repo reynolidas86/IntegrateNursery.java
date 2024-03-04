@@ -1,16 +1,16 @@
 import java.time.LocalDate;
 
 public class FloweringPlant extends Plant{
-    //TODO: Verify this should be a 'String' and not a different type
     private String color;
-    //TODO: Verify this type
-    private String[] features;
-
-    public FloweringPlant(String genusSpecies, String commonName, LocalDate introDate, PlantGroup plantGroup){
+    private String features;
+    
+    public FloweringPlant(String genusSpecies, String commonName, LocalDate introDate, PlantGroup plantGroup, String color, String features){
         super(genusSpecies, commonName, introDate, plantGroup);
+        this.color = color;
+        this.features = features;
     }
 
-    public String[] getFeatures(){
+    public String getFeatures(){
         return features;
     }
 

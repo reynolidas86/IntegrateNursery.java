@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.function.Predicate;
@@ -76,38 +75,18 @@ public class Plant {
         }
     }
     
-    private static long idStart = 4902;
-
-    //This is the 'HashMap' to hold the filtering predicates
-    private static Plant tempPlant;
+    private static long nextId = 4902;
+    
+    private static Plant oldest = null;
+    private static Plant youngest = null;
     public static final HashMap<String, Predicate<Plant>> evaluator;
     static{
         evaluator = new HashMap<String, Predicate<Plant>>();
         // Indicating whether the given plant has the most experience comparing to other plants.
-        evaluator.put("most_experienced", (p) -> {
-            tempPlant = PlantDriver.plants.get(0);
-            for(int index = 1; index < PlantDriver.plants.size(); index ++) {
-                if(PlantDriver.plants.get(index).getDateIntroduced().isBefore(tempPlant.getDateIntroduced())){
-                    tempPlant = PlantDriver.plants.get(index);
-                }
-            }  
-
-            //Can return the bool result of this method call instead of using an if statement to return true or false literals
-            return p.getCommonName().equalsIgnoreCase(tempPlant.getCommonName());
-        });
+        evaluator.put("most", (p) -> oldest.equals(p));
 
         //Indicating whether the given plant has the least experience comparing to other plants.
-        evaluator.put("least_experienced", (p) -> {
-            tempPlant = PlantDriver.plants.get(0);
-            for(int index = 1; index < PlantDriver.plants.size(); index ++) {
-                if(PlantDriver.plants.get(index).getDateIntroduced().isAfter(tempPlant.getDateIntroduced())){
-                    tempPlant = PlantDriver.plants.get(index);
-                }
-            }
-        
-            //Can return the bool result of this method call instead of using an if statement to return true or false literals
-            return p.getCommonName().equalsIgnoreCase(tempPlant.getCommonName());
-        });
+        evaluator.put("least", (p) -> youngest.equals(p));
     }
 
     private long id;
@@ -115,20 +94,32 @@ public class Plant {
     private String commonName;
     private PlantGroup plantGroup;
     private LocalDate dateIntroduced;
-    private ArrayList<Zone> zones = new ArrayList<Zone>();
+    private HashSet<Zone> zones = new HashSet<Zone>();
 
-    // working constructor
     public Plant(String genusSpecies, String commonName, LocalDate dateIntroduced, PlantGroup group){
-        id = idStart++;
+        id = nextId++;
         this.genusSpecies = genusSpecies;
         this.commonName = commonName;
         this.dateIntroduced = dateIntroduced;
         plantGroup = group;
 
-        // handle id and plant group
-
         validateGenusSpecies(genusSpecies);
         validateCommonName(commonName);
+
+        
+        if (oldest == null && youngest == null){
+            //This is the first plant we have created so far and should be stored as the baseline for
+            //  all future plants.
+            oldest = this;
+            youngest = this;
+            return;
+            //Early return because we don't need to evaluate the rest as it is only used for updating 
+            //  the stored values when new plants are created. But since this is the first plant we create
+            //  we would only end up comparing it against itself.
+        }
+    
+        oldest = this.dateIntroduced.isBefore(oldest.getDateIntroduced()) ? this : oldest;
+        youngest = this.dateIntroduced.isAfter(youngest.getDateIntroduced()) ? this : youngest;
     }
     
     /*
@@ -194,15 +185,28 @@ public class Plant {
      * 
      * @param                   The zone number to which will be added into the zone if conditions apply.
      */
-    public void addZone(int index){
-        if(index >= 1 && index <= 11) {
-            zones.add(Zone.zones.get(index));
+    public void addZone(int... index){
+        for (int i : index){
+            if(i >= 1 && i <= 11) {
+                zones.add(Zone.zones.get(i));
+            }
+            else{
+                System.err.println("Attempted to add an invalid zone, " + i + ", to plant " + this.commonName);
+                System.err.println("All zones must be between 1 and 11");
+            }
         }
     }
 
     @Override
     public String toString(){
-        return commonName + " (" + genusSpecies.split(" ")[0] + ")";
+        return commonName + " (" + genusSpecies + ")";
     }
 
+    @Override
+    public boolean equals(Object e){
+        if (!(e instanceof Plant))
+            return false;
+        
+        return ((Plant)e).id == this.id;
+    }
 }

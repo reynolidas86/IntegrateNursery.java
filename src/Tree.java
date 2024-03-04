@@ -1,12 +1,13 @@
 import java.time.LocalDate;
 
 public class Tree extends Plant{
-    public Tree(String genusSpecies, String commonName, LocalDate introDate, PlantGroup plantGroup){
+    private final GrowthSpeed speed;
+    public Tree(String genusSpecies, String commonName, LocalDate introDate, PlantGroup plantGroup, GrowthSpeed speed){
         super(genusSpecies, commonName, introDate, plantGroup);
+        this.speed = speed;
     }
-    public static enum growSpeed{
-        fast,
-        slow;
+
+    public GrowthSpeed getGrowthSpeed(){
+        return speed;
     }
-    //TODO: FILL OUT CLASS
 }

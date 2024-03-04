@@ -1,5 +1,11 @@
 import java.util.HashMap;
 
+/**
+ * Represents a zone as defined by the 
+ * <a href="https://arboretum.harvard.edu/stories/mapping-an-indeterminable-quantity/">Arnold Arboretum map</a>.
+ * <p>New zones cannot be created and instead users should access the preconstructed zones contained in the static HashMap
+ * {@code zones}.
+ */
 public class Zone {
     public static final HashMap<Integer, Zone> zones;
     static{
@@ -24,7 +30,7 @@ public class Zone {
         maxTemperature = max;
         minTemperature = min;
     }
-    /*
+    /**
      * Returns the value of the maximum temperature for the zone.
      * 
      * @return              The maximum temperature from the designated zone.
@@ -33,7 +39,7 @@ public class Zone {
         return maxTemperature;
     }
     
-    /*
+    /**
      * Returns the value of the minimum temperature for the zone.
      * 
      * @return              The minimum temperature from the designated zone.
