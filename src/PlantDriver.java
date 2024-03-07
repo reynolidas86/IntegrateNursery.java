@@ -80,6 +80,7 @@ public class PlantDriver {
         tempPlant = new FloweringPlant("Convallaria majalis", "Lily-of-the-Valley",
             LocalDate.of(2011, 10, 5), PlantGroup.ANGIOSPERM, "white, pink or red", "delicate, fragrent");
         tempPlant.addZone(5, 6, 7, 8);
+        plants.add(tempPlant);
     }
 
     /**
